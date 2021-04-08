@@ -21,7 +21,7 @@
           <div class="row">
             
             <!-- Right panel -->
-            <div class="col-md-4 col-sm-5">
+            <div class="col-md-3 col-sm-5">
               <h5> {{ wheater_data.city }}, {{ wheater_data.country_code }}</h5>
               <h6 id="localDate"></h6>
               <h5 id="localTime"></h5>
@@ -29,9 +29,9 @@
             </div>
             
             <!-- Center panel -->
-            <div class="col-md-5 col-sm-7" style="margin: 10px auto;padding:0;">
+            <div class="col-md-6 col-sm-7" style="margin: 10px auto;padding:0;">
               <div class="row">
-                <i class="wi" id ="main-icon" style="font-size: 85px;"><img src="http://openweathermap.org/img/wn/{{ wheater_data.icon }}.png" alt="image"></i>
+                <i class="wi" id ="main-icon" style="font-size: 85px;"><img src="http://openweathermap.org/img/wn/{{ wheater_data.icon }}@2x.png" alt="image"></i>
                 <div>
                   <spam id="mainTemperature">{{ wheater_data.temperature }}</spam>
                   <p id="tempDescription">{{ wheater_data.decsription }}</p>
