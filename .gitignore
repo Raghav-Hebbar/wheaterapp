@@ -1,3 +1,4 @@
 wheater/_pycache_/
 wheater/__pycache__/urls
 wheater/__pycache__/views
+db.sqlite3

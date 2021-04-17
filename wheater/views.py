@@ -26,7 +26,7 @@ def index(request):
                 if city_wheater['cod'] == 200:
                     form.save()
                 else:
-                    err_msg = 'City does not exist!'
+                    error_msg = 'City does not exist!'
             else:
                 error_msg = 'City already exist'
             
@@ -59,6 +59,11 @@ def index(request):
         }
         weather_data.append(wheater)
          
-    context = {'wheater_data': weather_data, 'form' : form}
+    context = { 
+        'wheater_data': weather_data, 
+        'form' : form,       
+        'message' : message,
+        'message_class' : message_class,
+    }
 
     return render(request, 'wheater/main.html',context)
