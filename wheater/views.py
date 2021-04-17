@@ -7,16 +7,40 @@ from .forms import CityForm
 
 def index(request):
 
-    cities = City.objects.all()
-    weather_data = []
-
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=44af8d57d2ae36fea4714cab2cce068c'
-    
+
+    error_msg = ''
+    message = ''
+    message_class = ''
+
     if request.method == 'POST':
         form = CityForm(request.POST)
-        form.save()
+
+        if form.is_valid():
+            new_city = form.cleaned_data['name']
+            existing_city_count = City.objects.filter(name= new_city).count()   
+            
+            if existing_city_count == 0:
+                city_wheater = requests.get(url.format(new_city)).json()
+
+                if city_wheater['main'] != "":
+                    form.save()
+                else:
+                    error_msg = 'City dose not exist'
+            else:
+                error_msg = 'City already exist'
+            
+        if error_msg:
+            message = error_msg
+            message_class = 'is-danger'
+        else:
+            message = 'City added successfully!'
+            message_class = 'is-success'
+
 
     form = CityForm()
+    cities = City.objects.all()
+    weather_data = []
 
     for city in cities: 
 
@@ -35,7 +59,6 @@ def index(request):
         }
         weather_data.append(wheater)
          
-        print(weather_data)
     context = {'wheater_data': weather_data, 'form' : form}
 
     return render(request, 'wheater/main.html',context)
