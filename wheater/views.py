@@ -1,15 +1,23 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import requests
+from .models import City
+from .forms import CityForm
 #from .models import City
 
 def index(request):
-    #cities = City.objects.all()
-    cities = ['London', 'Tokyo', 'Bangalore'] 
+
+    cities = City.objects.all()
     weather_data = []
 
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=44af8d57d2ae36fea4714cab2cce068c'
     
+    if request.method == 'POST':
+        form = CityForm(request.POST)
+        form.save()
+
+    form = CityForm()
+
     for city in cities: 
 
         city_wheater = requests.get(url.format(city)).json()
@@ -28,6 +36,6 @@ def index(request):
         weather_data.append(wheater)
          
         print(weather_data)
-    context = {'wheater_data': weather_data}
+    context = {'wheater_data': weather_data, 'form' : form}
 
     return render(request, 'wheater/main.html',context)
