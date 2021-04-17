@@ -36,70 +36,68 @@
         </div> 
       </div>
 
-      <div class="container" id="wrapper">
-          <div class="container-fluid" id="current-weather">
-            {% for wheater in wheater_data %}
+    {% for weather in wheater_data %}
+    <div class="container" id="wrapper">
+      <div class="container-fluid" id="current-weather">
+        <div class="row">
+          
+          <!-- Right panel -->
+          <div class="col-md-3 col-sm-5">
+            <h5> {{ weather.city }}, {{ weather.country_code }}</h5>
+            <h6 id="localDate"></h6>
+            <h5 id="localTime"></h5>
+            <a id="refreshButton" href="#"><i class="fa fa-refresh fa-fw" aria-hidden="true"></i> Refresh</a>
+          </div>
+          
+          <!-- Center panel -->
+          <div class="col-md-6 col-sm-7" style="margin: 10px auto;padding:0;">
             <div class="row">
-              
-              <!-- Right panel -->
-              <div class="col-md-3 col-sm-5">
-                <h5> {{ wheater_data.city }}, {{ wheater_data.country_code }}</h5>
-                <h6 id="localDate"></h6>
-                <h5 id="localTime"></h5>
-                <a id="refreshButton" href="#"><i class="fa fa-refresh fa-fw" aria-hidden="true"></i> Refresh</a>
+              <i class="wi" id ="main-icon" style="font-size: 85px;"><img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="image"></i>
+              <div>
+                <p id="mainTemperature">{{ weather.temperature }}</p>
+                <p id="tempDescription">{{ weather.decsription }}</p>
               </div>
-              
-              <!-- Center panel -->
-              <div class="col-md-6 col-sm-7" style="margin: 10px auto;padding:0;">
-                <div class="row">
-                  <i class="wi" id ="main-icon" style="font-size: 85px;"><img src="http://openweathermap.org/img/wn/{{ wheater_data.icon }}@2x.png" alt="image"></i>
-                  <div>
-                    <p id="mainTemperature">{{ wheater_data.temperature }}</p>
-                    <p id="tempDescription">{{ wheater_data.decsription }}</p>
-                  </div>
-                  <p style="font-size: 1.5rem;"><a href="#" class="active" id="celcius">°C</a> | <a href="#" id="farenheit">°F</a></p>
-                </div>
-              </div>
-              
-              <!-- Left panel -->
-              <div class="col-xs-12 col-sm-12 col-md-3 row" style="text-align: right;">
-                <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
-                  <h6>Humidity: <spam id="humidity">{{ wheater_data.humidity }}</spam>%</h6>
-                </div>
-                <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
-                  <h6>Wind: <spam id="wind">{{ wheater_data.wind }}</spam> m/s</h6>
-                </div>
-                <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
-                  <h6>High: <spam id="mainTempHot">{{ wheater_data.high }}</spam>°</h6>
-                </div>
-                <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
-                  <h6>Low: <spam id="mainTempLow">{{ wheater_data.low }}</spam>°</h6>
-                </div>
-              </div>
-              
+              <p style="font-size: 1.5rem;"><a href="#" class="active" id="celcius">°C</a> | <a href="#" id="farenheit">°F</a></p>
             </div>
           </div>
           
-          <!-- Modal -->
-          <div class="modal fade" id="protocol-modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                  <p>Due to weather api restrictions, data can only be shown via HTTP request.</p>
-                  <p>Sorry for the inconvenience.</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
+          <!-- Left panel -->
+          <div class="col-xs-12 col-sm-12 col-md-3 row" style="text-align: right;">
+            <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
+              <h6>Humidity: <spam id="humidity">{{ weather.humidity }}</spam>%</h6>
+            </div>
+            <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
+              <h6>Wind: <spam id="wind">{{ weather.wind }}</spam> m/s</h6>
+            </div>
+            <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
+              <h6>High: <spam id="mainTempHot">{{ weather.high }}</spam>°</h6>
+            </div>
+            <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
+              <h6>Low: <spam id="mainTempLow">{{ weather.low }}</spam>°</h6>
             </div>
           </div>
-          {% endfor %}  
         </div>
+      </div>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="protocol-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <p>Due to weather api restrictions, data can only be shown via HTTP request.</p>
+              <p>Sorry for the inconvenience.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>  
     </div>
+    {% endfor %}
 
     <!--Custom JS-->
   </body>
