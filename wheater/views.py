@@ -23,10 +23,10 @@ def index(request):
             if existing_city_count == 0:
                 city_wheater = requests.get(url.format(new_city)).json()
 
-                if city_wheater['main'] != "":
+                if city_wheater['cod'] == 200:
                     form.save()
                 else:
-                    error_msg = 'City dose not exist'
+                    err_msg = 'City does not exist!'
             else:
                 error_msg = 'City already exist'
             
