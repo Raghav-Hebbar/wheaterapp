@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import requests
 from .models import City
@@ -67,3 +67,8 @@ def index(request):
     }
 
     return render(request, 'wheater/main.html',context)
+
+
+def delete_city(request, city):
+    City.objects.get(name = city).delete()
+    return redirect('home')
